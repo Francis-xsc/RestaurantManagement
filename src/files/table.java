@@ -1,5 +1,14 @@
 package files;
 
+import Utils.JDBCUtils;
+import org.junit.Test;
+
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Objects;
 
 /**
@@ -9,74 +18,81 @@ import java.util.Objects;
 public class table
 {
     int id;
-    boolean leisure;
-    int MAX_person;
-    int location;
+    int max_person;
+    int floor;
+    boolean useable;
+    int curorderid;
 
     public table()
     {
     }
 
-    public table(int id, int MAX_person, int location)
+    public table(int id, int max_person, int floor, boolean useable, int curorderid)
     {
         this.id = id;
-        this.leisure = false;
-        this.MAX_person = MAX_person;
-        this.location = location;
+        this.max_person = max_person;
+        this.floor = floor;
+        this.useable = useable;
+        this.curorderid = curorderid;
+    }
+}
+
+class tablepanel
+{
+    table t;
+    JButton but1;
+
+    public tablepanel()
+    {
     }
 
-    @Override
-    public boolean equals(Object o)
+    public static JFrame jm()
     {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        table table = (table) o;
-        return id == table.id && leisure == table.leisure && MAX_person == table.MAX_person && location == table.location;
+        JFrame t=new JFrame();
+        JPanel jp=new JPanel(new GridLayout(31 ,5));
+        jp.add(new JLabel("桌号"));
+        jp.add(new JLabel("最大人数"));
+        jp.add(new JLabel("楼层"));
+        jp.add(new JLabel("状态"));
+        jp.add(new JLabel());
+        String sql="select * from `tables`";
+        List<table> a = JDBCUtils.getForList(table.class,sql);
+        for(table x:a)
+        {
+            jp.add(new JLabel(x.id+""));
+            jp.add(new JLabel(x.max_person+""));
+            jp.add(new JLabel(x.floor+""));
+            if(x.useable)
+                jp.add(new JLabel("空闲"));
+            else
+                jp.add(new JLabel("占用"));
+
+            JButton btn = new JButton("结账");
+            if(x.useable)
+                btn.setEnabled(false);
+            btn.addActionListener(new ActionListener()
+            {
+                @Override
+                public void actionPerformed(ActionEvent e)
+                {
+                    JFrame jf=new JFrame();
+                    String sql1="update `tables` set useable=1 where id=?";
+                    JDBCUtils.update(sql1,x.id);;
+                    jf.setSize(200,200);
+                    JPanel pa = new JPanel();
+                    t.setVisible(false);
+                    btn.setEnabled(false);
+                    t.setVisible(true);
+
+                    jf.add(new JLabel("应收:"));
+
+                    jf.setVisible(true);
+                }
+            });
+            jp.add(btn);
+        }
+        t.setContentPane(jp);
+        return t;
     }
 
-    @Override
-    public int hashCode()
-    {
-        return Objects.hash(id, leisure, MAX_person, location);
-    }
-
-    public int getId()
-    {
-        return id;
-    }
-
-    public void setId(int id)
-    {
-        this.id = id;
-    }
-
-    public boolean isLeisure()
-    {
-        return leisure;
-    }
-
-    public void setLeisure(boolean leisure)
-    {
-        this.leisure = leisure;
-    }
-
-    public int getMAX_person()
-    {
-        return MAX_person;
-    }
-
-    public void setMAX_person(int MAX_person)
-    {
-        this.MAX_person = MAX_person;
-    }
-
-    public int getLocation()
-    {
-        return location;
-    }
-
-    public void setLocation(int location)
-    {
-        this.location = location;
-    }
 }

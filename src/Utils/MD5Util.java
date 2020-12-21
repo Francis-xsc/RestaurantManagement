@@ -15,6 +15,7 @@ public class MD5Util
     /**
      * 将字符串转为MD5码
      * @param dataStr 要转换的字符串
+     *
      * @return
      */
     public static String tomd5(String dataStr)
