@@ -1,0 +1,136 @@
+create database restaurantmanager;
+use restaurantmanager;
+
+#Table: account
+CREATE TABLE `account` (
+  `id` varchar(50) DEFAULT NULL,
+  `password` varchar(50) DEFAULT NULL
+);
+
+#Table: menu
+CREATE TABLE `menu` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `name` varchar(20) DEFAULT NULL,
+  `price` double DEFAULT NULL,
+  PRIMARY KEY (`id`)
+);
+
+#Table: orderinfo
+CREATE TABLE `orderinfo` (
+  `order_id` int DEFAULT NULL,
+  `dish_id` int DEFAULT NULL,
+  `count` int DEFAULT NULL
+);
+
+#Table: orders
+CREATE TABLE `orders` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `numofpeople` int DEFAULT NULL,
+  `table_id` int DEFAULT NULL,
+  `start_time` timestamp NULL DEFAULT NULL,
+  `end_time` timestamp NULL DEFAULT NULL,
+  `total_price` double DEFAULT NULL,
+  PRIMARY KEY (`id`)
+);
+
+#Table: tables
+CREATE TABLE `tables` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `max_person` int DEFAULT NULL,
+  `floor` int DEFAULT NULL,
+  `useable` bit(1) DEFAULT NULL,
+  `curorderid` int DEFAULT NULL,
+  PRIMARY KEY (`id`)
+);
+
+INSERT INTO menu(name,price)
+VALUES ('重庆鸡公煲',13.9);
+INSERT INTO menu(name,price)
+VALUES ('麻辣香锅',12.5);
+INSERT INTO menu(name,price)
+VALUES ('土豆烧牛腩',14.9);
+INSERT INTO menu(name,price)
+VALUES ('韭菜猪肉馅',14.9);
+INSERT INTO menu(name,price)
+VALUES ('香菇猪肉馅',14.9);
+INSERT INTO menu(name,price)
+VALUES ('玉米猪肉馅',15.9);
+INSERT INTO menu(name,price)
+VALUES ('黑椒脆排饭',9.9);
+INSERT INTO menu(name,price)
+VALUES ('孜然脆排饭',9.5);
+INSERT INTO menu(name,price)
+VALUES ('叉烧脆排饭',11.8);
+INSERT INTO menu(name,price)
+VALUES ('腐竹黄焖鸡',10.8);
+INSERT INTO menu(name,price)
+VALUES ('黄焖鸡小份微辣',13);
+INSERT INTO menu(name,price)
+VALUES ('黄焖鸡小份中辣',14);
+INSERT INTO menu(name,price)
+VALUES ('鲜肉蒸饺',4);
+INSERT INTO menu(name,price)
+VALUES ('香拌混沌',5);
+INSERT INTO menu(name,price)
+VALUES ('蛋炒南昌米粉',7);
+
+INSERT INTO `tables`(max_person,`floor`,useable,curorderid)
+VALUES(15,-1,1,-1);
+INSERT INTO `tables`(max_person,`floor`,useable,curorderid)
+VALUES(15,-1,1,-1);
+INSERT INTO `tables`(max_person,`floor`,useable,curorderid)
+VALUES(15,-1,1,-1);
+INSERT INTO `tables`(max_person,`floor`,useable,curorderid)
+VALUES(20,-1,1,-1);
+INSERT INTO `tables`(max_person,`floor`,useable,curorderid)
+VALUES(20,-1,1,-1);
+INSERT INTO `tables`(max_person,`floor`,useable,curorderid)
+VALUES(30,-1,1,-1);
+INSERT INTO `tables`(max_person,`floor`,useable,curorderid)
+VALUES(2,-1,1,-1);
+INSERT INTO `tables`(max_person,`floor`,useable,curorderid)
+VALUES(2,1,1,-1);
+INSERT INTO `tables`(max_person,`floor`,useable,curorderid)
+VALUES(2,1,1,-1);
+INSERT INTO `tables`(max_person,`floor`,useable,curorderid)
+VALUES(3,1,1,-1);
+INSERT INTO `tables`(max_person,`floor`,useable,curorderid)
+VALUES(3,1,1,-1);
+INSERT INTO `tables`(max_person,`floor`,useable,curorderid)
+VALUES(3,1,1,-1);
+INSERT INTO `tables`(max_person,`floor`,useable,curorderid)
+VALUES(4,1,1,-1);
+INSERT INTO `tables`(max_person,`floor`,useable,curorderid)
+VALUES(4,1,1,-1);
+INSERT INTO `tables`(max_person,`floor`,useable,curorderid)
+VALUES(5,1,1,-1);
+INSERT INTO `tables`(max_person,`floor`,useable,curorderid)
+VALUES(5,1,1,-1);
+INSERT INTO `tables`(max_person,`floor`,useable,curorderid)
+VALUES(6,1,1,-1);
+INSERT INTO `tables`(max_person,`floor`,useable,curorderid)
+VALUES(6,1,1,-1);
+INSERT INTO `tables`(max_person,`floor`,useable,curorderid)
+VALUES(7,1,1,-1);
+INSERT INTO `tables`(max_person,`floor`,useable,curorderid)
+VALUES(7,1,1,-1);
+INSERT INTO `tables`(max_person,`floor`,useable,curorderid)
+VALUES(10,2,1,-1);
+INSERT INTO `tables`(max_person,`floor`,useable,curorderid)
+VALUES(10,2,1,-1);
+INSERT INTO `tables`(max_person,`floor`,useable,curorderid)
+VALUES(15,2,1,-1);
+INSERT INTO `tables`(max_person,`floor`,useable,curorderid)
+VALUES(15,2,1,-1);
+INSERT INTO `tables`(max_person,`floor`,useable,curorderid)
+VALUES(20,2,1,-1);
+INSERT INTO `tables`(max_person,`floor`,useable,curorderid)
+VALUES(20,2,1,-1);
+INSERT INTO `tables`(max_person,`floor`,useable,curorderid)
+VALUES(25,2,1,-1);
+INSERT INTO `tables`(max_person,`floor`,useable,curorderid)
+VALUES(25,2,1,-1);
+INSERT INTO `tables`(max_person,`floor`,useable,curorderid)
+VALUES(30,2,1,-1);
+INSERT INTO `tables`(max_person,`floor`,useable,curorderid)
+VALUES(30,2,1,-1);

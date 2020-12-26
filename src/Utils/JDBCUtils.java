@@ -1,10 +1,8 @@
 package Utils;
 
-import files.dish;
 import org.junit.Test;
 
 import java.io.InputStream;
-import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
 import java.sql.*;
 import java.util.ArrayList;
@@ -16,15 +14,41 @@ import java.util.Properties;
  * @time 2020/12/15 - 10:15
  */
 
+/**
+ * JDBC工具类
+ */
 public class JDBCUtils
 {
+    @Test
+    public void fn()
+    {
+        Connection conn= null;
+        try
+        {
+            conn = getConnection();
+            System.out.println(conn);
+        } catch (Exception e)
+        {
+            e.printStackTrace();
+        } finally
+        {
 
+            try
+            {
+                conn.close();
+            } catch (SQLException throwables)
+            {
+                throwables.printStackTrace();
+            }
+        }
+    }
     /**
      * 获取数据库连接
-     * @return
-     * @throws Exception
+     * @return 数据库连接
+     * @throws Exception 抛出异常
      */
-    public static Connection getConnection() throws Exception {
+    public static Connection getConnection() throws Exception
+    {
         // 1.读取配置文件中的4个基本信息
         InputStream is = ClassLoader.getSystemClassLoader().getResourceAsStream("jdbc.properties");
 
@@ -46,8 +70,8 @@ public class JDBCUtils
 
     /**
      * 关闭资源
-     * @param conn
-     * @param ps
+     * @param conn 连接
+     * @param ps Statement对象
      */
     public static void closeResource(Connection conn, Statement ps)
     {
@@ -71,9 +95,9 @@ public class JDBCUtils
 
     /**
      * 关闭资源
-     * @param conn
-     * @param ps
-     * @param rs
+     * @param conn 连接
+     * @param ps Statment对象
+     * @param rs 结果集
      */
     public static void closeResource(Connection conn, Statement ps, ResultSet rs)
     {
@@ -106,7 +130,7 @@ public class JDBCUtils
     /**
      * 通用的增删改操作
      * @param sql sql语句
-     * @param args 占位符
+     * @param args 填充占位符
      */
     public static void update(String sql,Object ...args){//sql中占位符的个数与可变形参的长度相同！
         Connection conn = null;
@@ -133,11 +157,11 @@ public class JDBCUtils
 
     /**
      * 针对于不同的表的通用的查询操作，返回表中的一条记录
-     * @param clazz
-     * @param sql
-     * @param args
-     * @param <T>
-     * @return
+     * @param clazz 类
+     * @param sql sql语句
+     * @param args 填充占位符
+     * @param <T> 类
+     * @return 表中的一条记录
      */
     public static <T> T getInstance(Class<T> clazz,String sql, Object... args) {
         Connection conn = null;
@@ -187,11 +211,11 @@ public class JDBCUtils
 
     /**
      * 返回list
-     * @param clazz
-     * @param sql
-     * @param args
-     * @param <T>
-     * @return
+     * @param clazz 类
+     * @param sql sql语句
+     * @param args 占位符
+     * @param <T> 类
+     * @return 查询到的结果集
      */
     public static  <T> List<T> getForList(Class<T> clazz,String sql, Object... args){
         Connection conn = null;

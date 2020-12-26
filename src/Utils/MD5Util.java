@@ -8,15 +8,19 @@ import java.security.NoSuchAlgorithmException;
  * @author xsc
  * @time 2020/12/17 - 11:02
  */
+
+/**
+ * MD5工具类
+ */
 public class MD5Util
 {
     private static final String slat = "&#5123***&&%%$$#@";
 
     /**
-     * 将字符串转为MD5码
+     * 将字符串转为MD5码，用于保存密码
      * @param dataStr 要转换的字符串
      *
-     * @return
+     * @return MD5码
      */
     public static String tomd5(String dataStr)
     {

@@ -6,6 +6,10 @@ import javax.swing.*;
  * @author xsc
  * @time 2020/12/19 - 11:26
  */
+
+/**
+ * 单个菜品的对象
+ */
 public class one_dish
 {
     dish d;
@@ -56,7 +60,7 @@ public class one_dish
 
     /**
      * 计算此菜品的总价，如果不填则结果为0
-     * @return
+     * @return 此菜品总价
      */
     public double calc()
     {
